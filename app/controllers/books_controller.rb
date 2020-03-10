@@ -5,14 +5,17 @@ class BooksController < ApplicationController
   def show
 	  @book = Book.find(params[:id])
 	  @user = @book.user
-	  favorites = @book.favorites
-	  @favorite = Favorite.where(user_id: current_user.id, book_id: @book).first
+	  @comment = Comment.new
+	  @comments = @book.comments
+	#   @comment_user = @book.comments.includes(:user).first
+	  session[:favorite] = "show"
   end
 
   def index
 	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
 	@book = Book.new
 	@user = current_user
+	session[:favorite] = "index"
   end
 
   def create
