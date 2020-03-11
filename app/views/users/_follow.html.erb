@@ -1,0 +1,13 @@
+<% if @user.followed?(current_user) %>
+    <div class="row">
+        <%= link_to user_relationship_path(@user), method: :delete, class:"btn btn-primary btn-block" do %>
+            <span>フォローを解除する</span>
+        <% end %>
+    </div>
+<% else %>
+    <div class="row">
+        <%= link_to user_relationship_path(@user), method: :post, class:"btn btn-primary btn-block" do %>
+            <span>フォローする</span>
+        <% end %>
+    </div>
+<% end %>
