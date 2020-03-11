@@ -3,12 +3,28 @@
 
 		<tr>
 			<th>name</th>
-			<th><%= @user.name %></th>
+			<td><%= @user.name %></td>
 		</tr>
 
 		<tr>
 			<th>introduction</th>
-			<th><%= @user.introduction %></th>
+			<td><%= @user.introduction %></td>
+		</tr>
+		<tr>
+			<th>follows</th>
+			<td>
+				<%= link_to relationships_follows_path do %>
+					<%= @user.followings.count %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<th>followers</th>
+			<td>
+				<%= link_to relationships_followers_path do %>
+					<%= @user.followers.count %>
+				<% end %>
+			</td>
 		</tr>
 </table>
 
