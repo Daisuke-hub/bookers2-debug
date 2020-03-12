@@ -9,10 +9,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   #==========================自分がフォローしているユーザとの関連============================================================================== 
-  # Relationshipsモデルに対してforein_keyをfollowing_user_idとしたアソシエーションを定義する(アソシエーションを結んだモデルをactive_relationshipsとする)
-  # belongs_to(has_many) 変更したい親モデル名, class_name: "元々の親モデル名"
   has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id
-  # followingのときはfollowerの情報を集める
   has_many :followings, through: :active_relationships, source: :follower
   # =====================================================================================================================================
 
@@ -30,6 +27,21 @@ class User < ApplicationRecord
   def followed?(user)
     passive_relationships.where(following_id: user.id).exists?
   end
+
+  def self.method_select(method,word)
+    if method == "forward_match"
+        @users = User.where("name LIKE ?","#{word}%")
+    elsif method == "backward_match"
+        @users = User.where("name LIKE ?","%#{word}")
+    elsif method == "perfect_match"
+        @users = User.where("name LIKE ?","#{word}")
+    elsif method == "partial_match"
+        @users = User.where("name LIKE ?","%#{word}%")
+    else
+        @users = User.all
+    end
+  end
+
 
 end
 

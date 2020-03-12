@@ -12,7 +12,12 @@ class BooksController < ApplicationController
   end
 
   def index
-	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
+	if @books = session[:word_params]
+		@books = Book.method_select(session[:method_params],session[:word_params])
+	else
+		@books = Book.all
+	end
+	session.delete(:word_params)
 	@book = Book.new
 	@user = current_user
 	session[:favorite] = "index"

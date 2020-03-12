@@ -9,9 +9,16 @@ class UsersController < ApplicationController
   end
 
   def index
+	if @users = session[:word_params]
+		@users = User.method_select(session[:method_params],session[:word_params])
+	else
+		@users = User.all
+	end
+	# session[:word_params].clear  .nilだと空の値が残るがdeleteだとsession自体が削除される
+	session.delete(:method_params)
+	session.delete(:word_params)
 	@user = current_user
-  	@users = User.all #一覧表示するためにUserモデルのデータを全て変数に入れて取り出す。
-	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
+	@book = Book.new
   end
 
   def edit
@@ -44,5 +51,6 @@ class UsersController < ApplicationController
 		redirect_to user_path(current_user)
 	end
  end
+ 
 
 end
