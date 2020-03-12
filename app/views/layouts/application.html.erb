@@ -41,15 +41,15 @@
     </header>
     <!--ヘッダーの記述-->
     <div class="container">
-      <br><p id="notice"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
+        <br><p id="notice"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
 
-    <%= yield %>
-    <%# フッダー %>
-    <div class="row">
-      <div class="col-xs-11">
-        <div class="text text-right">CopyRight Infratop.inc</div>
+      <%= yield %>
+      <%# フッダー %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text text-right">CopyRight Infratop.inc</div>
+        </div>
       </div>
-    </div>
 
     </div>
   </body>

@@ -15,4 +15,5 @@ Rails.application.routes.draw do
 
   root 'home#top'
   get 'home/about' => "home#about"
+  post 'search/target_select' => "search#target_select"
 end
